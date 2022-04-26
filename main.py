@@ -50,6 +50,38 @@ print(chainsList)
 
 #Fim do tratamento dos dados de entrada
 
+#Função que recebe uma cadeia de caracteres e analisa se o autonomo Aceita ou Rejeita ela
+def testChain(chain):
+    automataState = 0 #estado inicial
+
+    #Teste caso seja uma cadeia vazia
+    if(chain == '-'):
+        if automataState in acceptanceStatesList:
+            return True
+        return False
+
+    #Teste para validar se a cadeia contém apenas os simbolos contidos na lista de simbolos terminais
+    for i in chain:
+        if i not in terminalSymbolsList:
+            return False
+    #Rola apenas se for deterministico fazer assim
+    for input in chain:
+        for transition in transitionsList:
+            if int(transition[0]) == int(automataState) and transition[2] == input:
+                automataState = transition[4]
+                break
+    if automataState in acceptanceStatesList:
+        return True
+    return False
+
 #Execução do autômato a partir dos dados obtidos da entrada
+
+
+for i in chainsList:
+    if(testChain(i)): 
+        print("Aceita")
+    else:
+        print("Rejeita")
+
 
 newFile.close()
