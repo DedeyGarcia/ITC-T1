@@ -1,87 +1,95 @@
-print('Simulador Universal de Autômatos Finitos')
-newFileName = input("Entre com o nome ou endereço do arquivo de entrada: ")     #Explicar no manual como tratar o enderaço corretamente
+'''
+    testChainNew(chain):
+    Função que define um estado inicial para o simulador e 
+    chama a função recursiva de analise de cadeias testSubchain(chain, state).
+'''
+def testChainNew(chain):
+    global acceptanceStatesList, terminalSymbolsList, transitionsList
+    initialState = 0
 
-#Início do tratamento dos dados de entrada
+    return testSubchain(chain, initialState)
 
-#Divisão do arquivo em linhas e destrincha-lás em variáveis
-
-newFile = open(newFileName, 'r')
-newFileLines = newFile.readlines()
-
-numberOfStates = newFileLines[0]
-print('Número de Estados Q: ' + numberOfStates)
-
-quantityOfTerminalSymbols = newFileLines[1][0]
-print('Quantidade de Simbolos terminais (Σ): ' + quantityOfTerminalSymbols)
-terminalSymbolsList = []
-for i in newFileLines[1][1:]:
-    if i != ' '  and i != '\n':
-        terminalSymbolsList.append(i)
-print('Lista de símbolos terminais (Σ): ')
-print(terminalSymbolsList)
-
-quantityOfAcceptanceStates = newFileLines[2][0]
-print('Quantidade de Estados de aceitação (F): ' + quantityOfAcceptanceStates)
-acceptanceStatesList = []
-for i in newFileLines[2][1:]:
-    if i != ' '  and i != '\n':
-        acceptanceStatesList.append(i)
-print('Lista de Estados de aceitação (F): ')
-print(acceptanceStatesList)
-
-numberOfTransitions = newFileLines[3]
-print('o número de transições (δ) da máquina: ', numberOfTransitions)
-
-transitionsList = []
-for i in range(4, 4 + int(numberOfTransitions)):
-    transitionsList.append(newFileLines[i].replace('\n', ''))
-print('Lista de transições (δ): ')
-print(transitionsList)
-
-numberOfChainsLine = 4 + int(numberOfTransitions)
-numberOfChains = newFileLines[numberOfChainsLine]
-print('Número de Cadeias: ' + numberOfChains)
-
-chainsList = []
-for i in range(numberOfChainsLine + 1, numberOfChainsLine + 1 + int(numberOfChains)):
-    chainsList.append(newFileLines[i].replace('\n', ''))
-print('Lista de cadeias: ')
-print(chainsList)
-
-#Fim do tratamento dos dados de entrada
-
-#Função que recebe uma cadeia de caracteres e analisa se o autonomo Aceita ou Rejeita ela
-def testChain(chain):
-    automataState = 0 #estado inicial
-
-    #Teste caso seja uma cadeia vazia
-    if(chain == '-'):
-        if automataState in acceptanceStatesList:
+'''
+    testSubchain(chain, state)
+    Função recursiva que testa se uma subCadeia 
+    dada a partir da cadeia inicial é valida.
+    Tem como caso base da recursão chegar a uma cadeia vazia
+    seja ela '' ou a string de cadeia vazia definada no input ('-')
+'''
+def testSubchain(chain, state):
+    global acceptanceStatesList, terminalSymbolsList, transitionsList
+   
+    if(chain == '' or chain == '-'):
+        if state in acceptanceStatesList:
             return True
         return False
 
-    #Teste para validar se a cadeia contém apenas os simbolos contidos na lista de simbolos terminais
-    for i in chain:
-        if i not in terminalSymbolsList:
-            return False
-    #Rola apenas se for deterministico fazer assim
-    for input in chain:
-        for transition in transitionsList:
-            if int(transition[0]) == int(automataState) and transition[2] == input:
-                automataState = transition[4]
-                break
-    if automataState in acceptanceStatesList:
-        return True
+    currentChainInput = chain[0]
+
+    for transition in transitionsList:
+        if int(transition[0]) == int(state) and transition[2] == currentChainInput:
+            return testSubchain(chain[1:], transition[4])
+
     return False
 
-#Execução do autômato a partir dos dados obtidos da entrada
-outFile = open("ExemploOut.txt", "w")
 
-for i in chainsList:
-    if(testChain(i)): 
-        outFile.write("Aceita\n")
-    else:
-        outFile.write("Rejeita\n")
+'''
+    Função principal do arquivo, realiza a leitura de dados
+    a partir de um arquivo e faz a chamada das funções de analise
+    das cadeias
+'''
+if __name__ == "__main__":
+    print('Simulador Universal de Autômatos Finitos')
+    newFileName = input("Entre com o nome ou endereço do arquivo de entrada: ")     #Explicar no manual como tratar o enderaço corretamente
+
+    # Início do tratamento dos dados de entrada
+    
+    newFile = open(newFileName, 'r')
+    newFileLines = newFile.readlines()
+
+    numberOfStates = newFileLines[0]
+
+    quantityOfTerminalSymbols = newFileLines[1][0]
+
+    terminalSymbolsList = []
+    for i in newFileLines[1][1:]:
+        if i != ' '  and i != '\n':
+            terminalSymbolsList.append(i)
 
 
-newFile.close()
+    quantityOfAcceptanceStates = newFileLines[2][0]
+
+    acceptanceStatesList = []
+    for i in newFileLines[2][1:]:
+        if i != ' '  and i != '\n':
+            acceptanceStatesList.append(i)
+
+    numberOfTransitions = newFileLines[3]
+
+    transitionsList = []
+    for i in range(4, 4 + int(numberOfTransitions)):
+        transitionsList.append(newFileLines[i].replace('\n', ''))
+
+    numberOfChainsLine = 4 + int(numberOfTransitions)
+    numberOfChains = newFileLines[numberOfChainsLine]
+
+    chainsList = []
+    for i in range(numberOfChainsLine + 1, numberOfChainsLine + 1 + int(numberOfChains)):
+        chainsList.append(newFileLines[i].replace('\n', ''))
+
+    # Fim do tratamento dos dados de entrada
+
+    # Execução da simulação autômato 
+    # a partir dos dados obtidos da entrada e escrito no arquivo de saída
+
+    outFile = open("ExemploOut.txt", "w")
+
+    for i in chainsList:
+        if(testChainNew(i)): 
+            outFile.write("Aceita\n")
+        else:
+            outFile.write("Rejeita\n")
+
+    outFile.close()
+    newFile.close()
+
