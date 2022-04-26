@@ -75,13 +75,13 @@ def testChain(chain):
     return False
 
 #Execução do autômato a partir dos dados obtidos da entrada
-
+outFile = open("ExemploOut.txt", "w")
 
 for i in chainsList:
     if(testChain(i)): 
-        print("Aceita")
+        outFile.write("Aceita\n")
     else:
-        print("Rejeita")
+        outFile.write("Rejeita\n")
 
 
 newFile.close()
