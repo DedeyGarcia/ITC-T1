@@ -18,7 +18,6 @@ def testChainNew(chain):
 '''
 def testSubchain(chain, state):
     global acceptanceStatesList, terminalSymbolsList, transitionsList
-   
     if(chain == '' or chain == '-'):
         if state in acceptanceStatesList:
             return True
@@ -28,8 +27,8 @@ def testSubchain(chain, state):
 
     for transition in transitionsList:
         if int(transition[0]) == int(state) and transition[2] == currentChainInput:
-            return testSubchain(chain[1:], transition[4])
-
+            if testSubchain(chain[1:], transition[4]):
+                return True
     return False
 
 
@@ -86,9 +85,11 @@ if __name__ == "__main__":
 
     for i in chainsList:
         if(testChainNew(i)): 
-            outFile.write("Aceita\n")
+            print('aceita')
+            outFile.write("aceita\n")
         else:
-            outFile.write("Rejeita\n")
+            print('rejeita')
+            outFile.write("rejeita\n")
 
     outFile.close()
     newFile.close()
