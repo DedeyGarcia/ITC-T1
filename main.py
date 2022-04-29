@@ -81,7 +81,7 @@ if __name__ == "__main__":
     # Execução da simulação autômato 
     # a partir dos dados obtidos da entrada e escrito no arquivo de saída
 
-    outFile = open("ExemploOut.txt", "w")
+    outFile = open("Saida.txt", "w")
 
     for i in chainsList:
         if(testChainNew(i)): 
