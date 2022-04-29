@@ -12,13 +12,13 @@
 	-Um arquivo de documentação -> Documentação.pdf
 
 
-*Ambos os arquivos podem ser substituidos ou deletados para qualquer caso de teste que seja necessário
+*Ambos os arquivos podem ser alterados ou deletados para qualquer caso de teste que seja necessário
 
 # Para executar o programa basta usar qualquer tipo de terminal (bash, cmd, etc...)
 # e utilizar um dos comandos: "py main.py" ou python main.py"
 # a depender de seu sistema operacional ou instalação da linguagem para rodar o programa.
 
-# Ao ser executado o programa irá pedir para que o usuário    digite o nome do arquivo de entrada que ele
+# Ao ser executado o programa irá pedir para que o usuário   digite o nome do arquivo de entrada que ele
 # quer usar durante a execução do programa para servir de       entrada para o projeto.
 
 # Após a execução o resultado será exibido tanto no terminal quanto no arquivo de saída "Saida.txt"
