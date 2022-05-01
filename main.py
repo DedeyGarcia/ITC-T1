@@ -38,7 +38,7 @@ def testSubchain(chain, state):
 '''
 if __name__ == "__main__":
     print('Simulador Universal de Autômatos Finitos')
-    newFileName = input("Entre com o nome ou endereço do arquivo de entrada: ")     #Explicar no manual como tratar o enderaço corretamente
+    newFileName = input("Entre com o nome(ExemploIn.txt) ou endereço do arquivo de entrada: ")     #Explicar no manual como tratar o enderaço corretamente
 
     # Início do tratamento dos dados de entrada
     
