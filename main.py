@@ -4,7 +4,6 @@
     chama a função recursiva de analise de cadeias testSubchain(chain, state).
 '''
 def testChain(chain):
-    global acceptanceStatesList, terminalSymbolsList, transitionsList
     initialState = 0
 
     return testSubchain(chain, initialState)
