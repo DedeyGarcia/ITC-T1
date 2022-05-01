@@ -1,9 +1,9 @@
 '''
-    testChainNew(chain):
+    testChain(chain):
     Função que define um estado inicial para o simulador e 
     chama a função recursiva de analise de cadeias testSubchain(chain, state).
 '''
-def testChainNew(chain):
+def testChain(chain):
     global acceptanceStatesList, terminalSymbolsList, transitionsList
     initialState = 0
 
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     outFile = open("Saida.txt", "w")
 
     for i in chainsList:
-        if(testChainNew(i)): 
+        if(testChain(i)): 
             print('aceita')
             outFile.write("aceita\n")
         else:
