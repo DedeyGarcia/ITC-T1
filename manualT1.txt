@@ -5,7 +5,7 @@ Manual de instruções para rodar o programa:
 -Esta entrega contem:
 	-Um arquivo executável -> main.py
 	-Um arquivo de instruções -> manualT1.txt
-	-Um arquivo de entrada usado para testes locais -> ExemploIn.txt*
+	-Um arquivo de entrada usado para testes locais -> ExemploEntrada.txt*
 	-Um arquivo de saída gerado a partir da execução do programa -> Saida.txt*
 	-Um arquivo de documentação -> Documentação.pdf
 
@@ -18,7 +18,7 @@ a depender de seu sistema operacional ou instalação da linguagem para rodar o 
 
 -Ao ser executado o programa irá pedir para que o usuário digite o nome do arquivo de entrada que ele
 quer usar durante a execução do programa para servir de entrada para o projeto, sendo que esse pode ser somente o nome
-"ExemploIn.txt" ou o caminho do arquivo "C:\\Users\\Andrey Garcia\\Desktop\\ITC\\T1\\ExemploIn.txt"
+"ExemploEntrada.txt" ou o caminho do arquivo "C:\\Users\\Andrey Garcia\\Desktop\\ITC\\T1\\ExemploEntrada.txt"
 Caso seja usado um endereço, certifique-se que ele esteja de acordo com o que cada sistema operacional reconhece para
 o uso de um caminho, o exemplo acima funciona por exemplo para o sistema operacional Windows.
 
